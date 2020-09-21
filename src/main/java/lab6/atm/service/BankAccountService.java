@@ -27,5 +27,5 @@ public class BankAccountService {
         return new ArrayList<>(this.bankAccountsList);
 
     }
-   
+
 }
