@@ -11,25 +11,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/bankAccount")
+@RequestMapping("/bankaccount")
 public class BankAccountController {
 
-    private BankAccountService bankAccountService;
+    private BankAccountService accountService;
 
-    public BankAccountController(BankAccountService bankAccountService) {
-        this.bankAccountService = bankAccountService;
+    public BankAccountController(BankAccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping
-    public String getBankAccountPage(Model models) {
-        models.addAttribute("allBankAccount", bankAccountService.getBankAccounts());
-        return "bankAccount";
+    public String getBankAccountPage(Model model) {
+        model.addAttribute("bankaccounts", accountService.getBankAccounts());
+        return "bankaccount";
     }
 
     @PostMapping
-    public String registerBankAccount(@ModelAttribute BankAccount bankAccount, Model models) {
-        bankAccountService.createBankAccount(bankAccount);
-        models.addAttribute("allBankAccount", bankAccountService.getBankAccounts());
-        return "redirect:bankAccount";
+    public String openAccount(@ModelAttribute BankAccount bankAccount, Model model) {
+        accountService.openAccount(bankAccount);
+        model.addAttribute("bankaccounts",accountService.getBankAccounts());
+        return "redirect:bankaccount";
     }
 }
+
